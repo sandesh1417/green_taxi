@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -50,20 +53,10 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: ' ',
-    appId: '',
-    messagingSenderId: ' ',
-    projectId: ' ',
-    storageBucket: ' ',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: ' ',
-    appId: ' ',
-    messagingSenderId: ' ',
-    projectId: ' ',
-    storageBucket: ' ',
-    iosClientId: ' ',
-    iosBundleId: ' ',
+    apiKey: 'AIzaSyA4FXXSzgwVR2cc2pSAnD5ZuA9yOTMwRCE',
+    appId: '1:824503692035:android:2040bc1ee99106adc41736',
+    messagingSenderId: '824503692035',
+    projectId: 'green-taxi-017',
+    storageBucket: 'green-taxi-017.appspot.com',
   );
 }

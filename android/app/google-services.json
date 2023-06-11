@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "824503692035",
+    "project_id": "green-taxi-017",
+    "storage_bucket": "green-taxi-017.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:824503692035:android:2040bc1ee99106adc41736",
+        "android_client_info": {
+          "package_name": "com.dotcoder.green_taxi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "824503692035-te53ihap251qk2apd4asqqamhbau7n7b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4FXXSzgwVR2cc2pSAnD5ZuA9yOTMwRCE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "824503692035-te53ihap251qk2apd4asqqamhbau7n7b.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "824503692035-gmi4f062ik5j4jt3m9eck5m8rra3uqnc.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dotcoder.greenTaxi"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

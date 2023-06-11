@@ -45,8 +45,10 @@ class AuthController extends GetxController {
   getUserCards() {
     FirebaseFirestore.instance
         .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid).collection('cards')
-    .snapshots().listen((event) {
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('cards')
+        .snapshots()
+        .listen((event) {
       userCards.value = event.docs;
     });
   }
@@ -117,29 +119,21 @@ class AuthController extends GetxController {
           .doc(user.uid)
           .get()
           .then((value) {
-
-
         ///isLoginAsDriver == true means navigate it to driver module
 
-        if(isLoginAsDriver){
-
+        if (isLoginAsDriver) {
           if (value.exists) {
             print("Driver HOme Screen");
           } else {
-            Get.offAll(() => DriverProfileSetup());
+            Get.offAll(() => const DriverProfileSetup());
           }
-
-
-        }else{
+        } else {
           if (value.exists) {
-            Get.offAll(() => HomeScreen());
+            Get.offAll(() => const HomeScreen());
           } else {
-            Get.offAll(() => ProfileSettingScreen());
+            Get.offAll(() => const ProfileSettingScreen());
           }
         }
-
-
-
       }).catchError((e) {
         print("Error while decideRoute is $e");
       });
@@ -175,13 +169,13 @@ class AuthController extends GetxController {
     LatLng? businessLatLng,
     LatLng? shoppingLatLng,
   }) async {
-    String url_new = url;
+    String urlNew = url;
     if (selectedImage != null) {
-      url_new = await uploadImage(selectedImage);
+      urlNew = await uploadImage(selectedImage);
     }
     String uid = FirebaseAuth.instance.currentUser!.uid;
     FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'image': url_new,
+      'image': urlNew,
       'name': name,
       'home_address': home,
       'business_address': business,
@@ -191,10 +185,10 @@ class AuthController extends GetxController {
           GeoPoint(businessLatLng!.latitude, businessLatLng.longitude),
       'shopping_latlng':
           GeoPoint(shoppingLatLng!.latitude, shoppingLatLng.longitude),
-    },SetOptions(merge: true)).then((value) {
+    }, SetOptions(merge: true)).then((value) {
       isProfileUploading(false);
 
-      Get.to(() => HomeScreen());
+      Get.to(() => const HomeScreen());
     });
   }
 
@@ -221,7 +215,7 @@ class AuthController extends GetxController {
       context: context,
       mode: Mode.overlay,
       apiKey: AppConstants.kGoogleApiKey,
-      components: [new Component(Component.country, "pk")],
+      components: [Component(Component.country, "pk")],
       types: [],
       hint: "Search City",
     );
@@ -235,46 +229,37 @@ class AuthController extends GetxController {
     return LatLng(locations.first.latitude, locations.first.longitude);
   }
 
-
-
   storeDriverProfile(
-      File? selectedImage,
-      String name,
-      String email, {
-        String url = '',
-
-      }) async {
-    String url_new = url;
+    File? selectedImage,
+    String name,
+    String email, {
+    String url = '',
+  }) async {
+    String urlNew = url;
     if (selectedImage != null) {
-      url_new = await uploadImage(selectedImage);
+      urlNew = await uploadImage(selectedImage);
     }
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    FirebaseFirestore.instance.collection('users').doc(uid).set({
-      'image': url_new,
-      'name': name,
-      'email': email,
-      'isDriver': true
-    },SetOptions(merge: true)).then((value) {
+    FirebaseFirestore.instance.collection('users').doc(uid).set(
+        {'image': urlNew, 'name': name, 'email': email, 'isDriver': true},
+        SetOptions(merge: true)).then((value) {
       isProfileUploading(false);
 
-      Get.off(()=> CarRegistrationTemplate());
-
-
-
+      Get.off(() => const CarRegistrationTemplate());
     });
   }
 
-  
-
-  Future<bool> uploadCarEntry(Map<String,dynamic> carData)async{
-     bool isUploaded = false;
+  Future<bool> uploadCarEntry(Map<String, dynamic> carData) async {
+    bool isUploaded = false;
     String uid = FirebaseAuth.instance.currentUser!.uid;
 
-   await FirebaseFirestore.instance.collection('users').doc(uid).set(carData,SetOptions(merge: true));
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .set(carData, SetOptions(merge: true));
 
-   isUploaded = true;
+    isUploaded = true;
 
     return isUploaded;
   }
-
 }
